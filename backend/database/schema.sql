@@ -1,6 +1,6 @@
---Suppliers Table 
+-- Suppliers Table
 CREATE TABLE suppliers (
-    suppliers_id SERIAL PRIMARY KEY,
+    supplier_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     contact_person VARCHAR(100),
     email VARCHAR(100),
@@ -10,19 +10,17 @@ CREATE TABLE suppliers (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
 -- Purchase Orders Table
 CREATE TABLE purchase_orders (
     order_id SERIAL PRIMARY KEY,
-    suppliers_id INT REFERENCES suppliers(suppliers_id),
+    supplier_id INT REFERENCES suppliers(supplier_id),
     order_date DATE NOT NULL,
-    expected_delivery_date DATE,
+    expected_delivery_date DATE NOT NULL,
     actual_delivery_date DATE,
-    total_amount DECIMAL(10,2)
-    status VARCHAR(20) DEFAULT 'pending',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+    total_amount DECIMAL(10, 2),
+    order_status VARCHAR(20) DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
 
 -- Order Items Table
 CREATE TABLE order_items (
@@ -68,4 +66,4 @@ CREATE TABLE supplier_kpis (
     overall_score DECIMAL(5, 2),
     risk_level VARCHAR(20),
     calculated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-); 
+);
