@@ -68,3 +68,4 @@ CREATE TABLE supplier_kpis (
     overall_score DECIMAL(5, 2),
     risk_level VARCHAR(20),
     calculated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+); 
