@@ -3,7 +3,7 @@
 University Final Project - Information Systems & Business Analysis
 
 ## Team Members
-- Person 1: Business Analyst/Project Lead - [Name]
+- Person 1: Business Analyst/Project Lead - [Hesham]
 - Person 2: Backend Developer - [Mohammed]
 - Person 3: Frontend Developer - [Name]
 - Person 4: Data Analyst/QA - [Name]
