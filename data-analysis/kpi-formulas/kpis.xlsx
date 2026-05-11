@@ -1,0 +1,117 @@
+-- KPI-Based Supplier Performance Evaluation
+
+\\\On-Time Delivery Rate (OTD)
+Purpose
+
+Measures supplier delivery reliability.
+
+Formula
+On-Time Delivery Rate (%) =
+(Number of On-Time Deliveries / Total Deliveries) × 100
+SQL Logic
+SUM(CASE WHEN is_on_time = TRUE THEN 1 ELSE 0 END)
+/
+COUNT(delivery_id)
+* 100
+Tables Used
+deliveries
+
+\\\Defect Rate
+Purpose
+
+Measures supplier quality performance.
+
+Formula
+Defect Rate (%) =
+(Total Defective Items / Total Inspected Items) × 100
+SQL Logic
+SUM(defective_items)
+/
+SUM(total_items)
+* 100
+Tables Used
+quality_inspections
+
+\\\Fill Rate (Order Fulfillment Rate)
+Purpose
+
+Measures how completely suppliers fulfill orders.
+
+Formula
+Fill Rate (%) =
+(Total Received Quantity / Total Ordered Quantity) × 100
+SQL Logic
+SUM(deliveries.received_quantity)
+/
+SUM(order_items.quantity)
+* 100
+Tables Used
+deliveries
+order_items
+
+\\\Average Lead Time
+Purpose
+
+Measures supplier responsiveness speed.
+
+Formula
+Average Lead Time =
+Average(actual_delivery_date - order_date)
+
+Measured in:
+
+days
+SQL Logic
+AVG(actual_delivery_date - order_date)
+Tables Used
+purchase_orders
+
+\\\Inspection Pass Rate
+Purpose
+
+Measures percentage of deliveries passing inspection.
+
+Formula
+Inspection Pass Rate (%) =
+(Number of Passed Inspections / Total Inspections) × 100
+SQL Logic
+SUM(CASE WHEN passed = TRUE THEN 1 ELSE 0 END)
+/
+COUNT(inspection_id)
+* 100
+Tables Used
+quality_inspections
+
+\\\Order Completion Rate
+Purpose
+
+Measures successful order completion.
+
+Formula
+Order Completion Rate (%) =
+(Number of Completed Orders / Total Orders) × 100
+SQL Logic
+SUM(CASE WHEN order_status = 'completed' THEN 1 ELSE 0 END)
+/
+COUNT(order_id)
+* 100
+Tables Used
+purchase_orders
+
+\\\Overall Supplier Performance Score
+Purpose
+
+Combines all KPIs into one supplier evaluation score.
+
+Formula
+
+weighted model:
+
+Overall Score =
+(OTD × 0.30)
++
+((100 - Defect Rate) × 0.30)
++
+(Fill Rate × 0.20)
++
+(Inspection Pass Rate × 0.20)
